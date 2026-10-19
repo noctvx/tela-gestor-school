@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#211f62">
+  <title>SchoolFix | Gestão escolar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#inicio" aria-label="SchoolFix - início">
+        <span class="brand-mark">SF</span><span>SchoolFix</span>
+      </a>
+      <nav class="navigation" aria-label="Navegação principal">
+        <button class="nav-item active" type="button" data-page="inicio"><span class="nav-icon"><img src="https://cdn-icons-png.flaticon.com/128/10102/10102571.png" alt=""></span><span>Início</span></button>
+        <button class="nav-item" type="button" data-page="reclamacoes"><span class="nav-icon"><img src="https://cdn-icons-png.flaticon.com/128/3502/3502506.png" alt=""></span><span>Todas Reclamações</span><span class="nav-count" id="nav-count">8</span></button>
+        <button class="nav-item" type="button" data-page="chat"><span class="nav-icon"><img src="https://cdn-icons-png.flaticon.com/128/739/739286.png" alt=""></span><span>Chat Geral</span></button>
+        <button class="nav-item" type="button" data-page="mensagens"><span class="nav-icon"><img src="https://cdn-icons-png.flaticon.com/128/2099/2099100.png" alt=""></span><span>Mensagens Diretas</span></button>
+        <button class="nav-item" type="button" data-page="relatorios"><span class="nav-icon"><img src="https://cdn-icons-png.flaticon.com/128/12027/12027025.png" alt=""></span><span>Relatórios</span></button>
+        <button class="nav-item" type="button" data-page="configuracoes"><span class="nav-icon"><img src="https://cdn-icons-png.flaticon.com/128/3524/3524681.png" alt=""></span><span>Configuração</span></button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="help-icon">?</div>
+        <div><strong>Precisa de ajuda?</strong><span>Fale com o suporte</span></div>
+        <button class="icon-button help-button" type="button" aria-label="Ajuda">›</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="school-title"><span class="school-icon"><img src="https://cdn-icons-png.flaticon.com/128/9316/9316730.png" alt=""></span><span>Unisal — Gestão de Reclamações</span></div>
+        <div class="topbar-actions">
+          <div class="notification-wrap">
+            <button class="icon-button notification-button" type="button" aria-label="Abrir notificações" aria-expanded="false"><img src="https://cdn-icons-png.flaticon.com/128/4991/4991422.png" alt=""><span class="notification-dot"></span></button>
+            <div class="notification-popover" hidden>
+              <strong>Notificações</strong>
+              <p><span class="notification-mark"></span>Nova reclamação: Laboratório de Química</p>
+              <p><span class="notification-mark muted"></span>Relatório mensal disponível</p>
+              <button type="button" class="text-button" data-action="read-notifications">Marcar como lidas</button>
+            </div>
+          </div>
+          <span class="topbar-divider"></span>
+          <span class="user-avatar">M</span>
+          <div class="user-info"><strong>Gestor Mario</strong><span>Gestor Geral</span></div>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <section class="page-view active" id="page-inicio" data-title="Visão geral">
+          <div class="page-heading">
+            <div><p class="eyebrow">QUARTA-FEIRA, 15 DE OUTUBRO</p><h1>Olá, Gestor Mario <span class="wave">✦</span></h1><p class="page-description">Aqui está o resumo geral das ocorrências e reclamações escolares.</p></div>
+            <button class="button button-primary" type="button" data-navigate="reclamacoes"><span>＋</span> Nova reclamação</button>
+          </div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Total de reclamações</span><span class="stat-icon indigo"><img src="https://cdn-icons-png.flaticon.com/128/9775/9775639.png" alt=""></span></div><strong>148</strong><small class="trend positive">↗ 12% <span>vs. mês anterior</span></small></article>
+            <article class="stat-card"><div class="stat-top"><span>Pendentes</span><span class="stat-icon amber"><img src="https://cdn-icons-png.flaticon.com/128/992/992700.png" alt=""></span></div><strong>32</strong><small class="trend neutral">Aguardando análise</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Em análise</span><span class="stat-icon blue"><img src="https://cdn-icons-png.flaticon.com/128/709/709612.png" alt=""></span></div><strong>45</strong><small class="trend neutral">Sendo acompanhadas</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Resolvidas</span><span class="stat-icon green"><img src="https://cdn-icons-png.flaticon.com/128/157/157977.png" alt=""></span></div><strong>71</strong><small class="trend positive">↗ 8% <span>este mês</span></small></article>
+          </div>
+          <div class="dashboard-grid">
+            <section class="surface recent-panel">
+              <div class="section-heading"><div><h2>Reclamações recentes</h2><p>Acompanhe as últimas ocorrências da escola.</p></div><button class="text-button" type="button" data-navigate="reclamacoes">Ver todas <span>→</span></button></div>
+              <div class="table-scroll"><table class="data-table">
+                <thead><tr><th>RECLAMAÇÃO</th><th>CATEGORIA</th><th>STATUS</th><th>DATA</th><th></th></tr></thead>
+                <tbody id="home-complaints"></tbody>
+              </table></div>
+            </section>
+            <section class="surface category-panel">
+              <div class="section-heading"><div><h2>Ocorrências por categoria</h2><p>Distribuição das reclamações</p></div><span class="more-dots">•••</span></div>
+              <div class="category-list" id="home-categories"></div>
+              <div class="category-foot"><span class="legend-dot"></span>Infraestrutura <span class="category-total">148 no total</span></div>
+            </section>
+          </div>
+          <section class="surface attention-card"><div class="attention-symbol">!</div><div><strong>Você tem 8 reclamações aguardando atenção</strong><p>Revise os novos registros para manter a comunidade informada.</p></div><button class="button button-light" type="button" data-navigate="reclamacoes">Revisar agora <span>→</span></button></section>
+        </section>
+
+        <section class="page-view" id="page-reclamacoes" data-title="Todas as reclamações">
+          <div class="complaints-layout">
+            <div class="complaints-main">
+              <div class="page-heading compact-heading"><div><p class="eyebrow">CENTRAL DE ATENDIMENTO</p><h1>Todas as reclamações</h1><p class="page-description">Gerencie, acompanhe e responda às solicitações da comunidade.</p></div><button class="button button-primary" type="button" data-action="new-complaint">＋ Nova reclamação</button></div>
+              <section class="surface complaints-list">
+                <div class="list-toolbar"><label class="search-box"><span>⌕</span><input id="complaint-search" type="search" placeholder="Buscar por título, autor ou protocolo..." aria-label="Buscar reclamações"></label><button class="icon-button filter-button" type="button" data-action="toggle-filter" aria-label="Mostrar filtros">☷</button></div>
+                <div class="filter-row" role="group" aria-label="Filtrar reclamações por status">
+                  <button class="filter-chip selected" type="button" data-filter="Todas">Todas <span>8</span></button>
+                  <button class="filter-chip" type="button" data-filter="Aberta">Abertas</button>
+                  <button class="filter-chip" type="button" data-filter="Em Análise">Em análise</button>
+                  <button class="filter-chip" type="button" data-filter="Resolvido">Resolvidas</button>
+                  <button class="filter-chip" type="button" data-filter="Arquivada">Arquivadas</button>
+                </div>
+                <div class="table-scroll complaints-table-scroll"><table class="data-table complaint-table">
+                  <thead><tr><th>PROTOCOLO</th><th>TÍTULO</th><th>CATEGORIA</th><th>AUTOR</th><th>STATUS</th><th>DATA</th><th></th></tr></thead>
+                  <tbody id="complaint-rows"></tbody>
+                </table></div>
+                <div class="list-footer"><span id="complaint-count">Mostrando 8 de 8 reclamações</span><div class="pagination" id="complaint-pagination" aria-label="Paginação das reclamações"></div></div>
+              </section>
+            </div>
+            <aside class="surface complaint-detail" id="complaint-detail" aria-live="polite"></aside>
+          </div>
+        </section>
+
+        <section class="page-view" id="page-chat" data-title="Chat geral">
+          <div class="page-heading compact-heading"><div><p class="eyebrow">COMUNIDADE ESCOLAR</p><h1>Chat geral</h1><p class="page-description">Converse com professores, alunos e colaboradores da escola.</p></div><button class="button button-outline" type="button" data-action="chat-info">ⓘ Sobre o chat</button></div>
+          <div class="chat-layout surface">
+            <aside class="channel-sidebar"><h3>CANAIS</h3><button class="channel selected" type="button"><span>#</span> Geral <i class="online-dot"></i></button><button class="channel" type="button"><span>#</span> Professores</button><button class="channel" type="button"><span>#</span> Gestão</button><div class="channel-note"><strong>Seja respeitoso 💚</strong><span>Este espaço é para toda a comunidade escolar.</span></div></aside>
+            <section class="chat-room">
+              <div class="chat-room-heading"><div><h2># Geral</h2><p>Conversa aberta para toda a comunidade</p></div><span class="online-count"><i class="online-dot"></i> 24 membros</span></div>
+              <div class="message-list" id="general-messages" aria-live="polite">
+                <div class="date-separator"><span>HOJE</span></div>
+                <article class="message"><span class="person-avatar lavender">AS</span><div><div class="message-meta"><strong>Ana Silva</strong><span>Professora · 09:12</span></div><p>Oi, pessoal! Alguém sabe quando teremos novidades sobre a biblioteca?</p></div></article>
+                <article class="message"><span class="person-avatar mint">MS</span><div><div class="message-meta"><strong>Marcos Souza</strong><span>Coordenador · 09:18</span></div><p>Oi, Ana! Estamos organizando tudo e logo compartilharemos as atualizações por aqui.</p></div></article>
+                <article class="message own-message"><span class="person-avatar navy-avatar">M</span><div><div class="message-meta"><strong>Gestor Mario <span class="you-tag">VOCÊ</span></strong><span>09:24</span></div><p>Excelente ponto! Vou confirmar o cronograma com a equipe e aviso vocês ainda hoje.</p></div></article>
+                <article class="message"><span class="person-avatar peach">LT</span><div><div class="message-meta"><strong>Lucas Torres</strong><span>Aluno · 09:31</span></div><p>Obrigado pelo retorno, Gestor! 😊</p></div></article>
+              </div>
+              <form class="message-composer" id="general-chat-form"><input name="message" autocomplete="off" placeholder="Escreva uma mensagem..." aria-label="Escreva uma mensagem"><button class="attach-button" type="button" aria-label="Anexar arquivo" data-action="attach">＋</button><button class="send-button" type="submit" aria-label="Enviar mensagem">➤</button></form>
+            </section>
+            <aside class="members-sidebar"><div class="members-heading"><h3>MEMBROS</h3><span>24</span></div><div class="member"><span class="person-avatar lavender">AS</span><span><strong>Ana Silva</strong><small>Professora</small></span><i class="online-dot"></i></div><div class="member"><span class="person-avatar mint">MS</span><span><strong>Marcos Souza</strong><small>Coordenador</small></span><i class="online-dot"></i></div><div class="member"><span class="person-avatar peach">LT</span><span><strong>Lucas Torres</strong><small>Aluno</small></span></div><div class="member"><span class="person-avatar blue-avatar">CP</span><span><strong>Carla Pereira</strong><small>Professora</small></span></div><button class="text-button members-more" type="button" data-action="members">Ver todos os membros →</button></aside>
+          </div>
+        </section>
+
+        <section class="page-view" id="page-mensagens" data-title="Mensagens diretas">
+          <div class="page-heading compact-heading"><div><p class="eyebrow">CONVERSAS PRIVADAS</p><h1>Mensagens diretas</h1><p class="page-description">Converse em particular com a equipe escolar.</p></div><button class="button button-primary" type="button" data-action="new-message">＋ Nova conversa</button></div>
+          <div class="direct-layout surface">
+            <aside class="direct-people"><label class="search-box"><span>⌕</span><input id="people-search" type="search" placeholder="Buscar conversa..." aria-label="Buscar conversa"></label><div class="direct-list" id="direct-list"></div></aside>
+            <section class="direct-room"><div class="direct-room-heading" id="direct-heading"></div><div class="message-list" id="direct-messages" aria-live="polite"></div><form class="message-composer" id="direct-chat-form"><input name="message" autocomplete="off" placeholder="Escreva uma mensagem..." aria-label="Escreva uma mensagem"><button class="send-button" type="submit" aria-label="Enviar mensagem">➤</button></form></section>
+          </div>
+        </section>
+
+        <section class="page-view" id="page-relatorios" data-title="Relatórios">
+          <div class="page-heading compact-heading"><div><p class="eyebrow">DADOS E INDICADORES</p><h1>Relatórios</h1><p class="page-description">Métricas e análise de resolução de problemas e solicitações escolares.</p></div><div class="heading-actions"><select id="report-period" aria-label="Período do relatório"><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Este ano</option></select><button class="button button-primary" type="button" data-action="export-report">⇩ <span>Exportar CSV</span></button></div></div>
+          <div class="reports-grid">
+            <section class="surface report-card status-report"><div class="section-heading"><div><h2>Visão por status</h2><p>Distribuição atual das reclamações</p></div><span class="more-dots">•••</span></div><div class="status-bars" id="report-status-bars"></div></section>
+            <section class="surface report-card priority-report"><div class="section-heading"><div><h2>Visão por prioridade</h2><p>Urgência dos chamados recebidos</p></div><span class="more-dots">•••</span></div><div class="donut-wrap"><div class="donut-chart"><div><strong>148</strong><span>reclamações</span></div></div><div class="donut-legend"><span><i class="dot red-dot"></i>Alta <b>35%</b></span><span><i class="dot blue-dot"></i>Média <b>42%</b></span><span><i class="dot green-dot"></i>Baixa <b>23%</b></span></div></div></section>
+            <section class="surface report-card volume-report"><div class="section-heading"><div><h2>Volume por categoria</h2><p>Registros por área</p></div><span class="more-dots">•••</span></div><div class="vertical-chart" id="category-chart"></div></section>
+          </div>
+          <div class="metric-grid"><article class="surface metric-card"><span>Tempo médio de resolução</span><strong>2,4 dias</strong><small class="trend positive">↓ 12% em relação ao mês anterior</small></article><article class="surface metric-card"><span>Taxa de resolução</span><strong>94,2%</strong><small class="trend positive">Dentro da meta (90%)</small></article><article class="surface metric-card"><span>Categoria mais frequente</span><strong>Infraestrutura</strong><small>Corresponde a 30% do total</small></article><article class="surface metric-card"><span>Próximo dia de pico</span><strong>Segunda-feira</strong><small>Maior volume entre 10h e 12h</small></article></div>
+        </section>
+
+        <section class="page-view" id="page-configuracoes" data-title="Configurações">
+          <div class="page-heading compact-heading"><div><p class="eyebrow">PREFERÊNCIAS DA CONTA</p><h1>Configurações</h1><p class="page-description">Gerencie os dados da instituição, notificações e preferências do sistema.</p></div></div>
+          <div class="settings-grid">
+            <form class="surface settings-card" id="institution-form"><div class="settings-title"><span class="settings-icon">▦</span><div><h2>Perfil da instituição</h2><p>Informações da sua escola</p></div></div><label>Nome da escola<input name="school" value="C.E. Mário de Andrade" required></label><label>Endereço<input name="address" value="Av. das Palmeiras, 845 — Centro" required></label><div class="form-row"><label>Telefone<input name="phone" value="(11) 3456-7890" type="tel"></label><label>E-mail<input name="email" value="contato@escola.edu.br" type="email"></label></div><button class="button button-primary" type="submit">Salvar alterações</button></form>
+            <section class="surface settings-card"><div class="settings-title"><span class="settings-icon">♧</span><div><h2>Notificações</h2><p>Escolha o que deseja receber</p></div></div><div class="toggle-row"><div><strong>Notificações por e-mail</strong><span>Receba atualizações importantes por e-mail</span></div><label class="switch"><input type="checkbox" name="emailNotifications" checked><span></span></label></div><div class="toggle-row"><div><strong>Notificações push</strong><span>Alertas em tempo real no navegador</span></div><label class="switch"><input type="checkbox" name="pushNotifications" checked><span></span></label></div><div class="toggle-row"><div><strong>Novas reclamações</strong><span>Quando uma nova reclamação for registrada</span></div><label class="switch"><input type="checkbox" name="newComplaints" checked><span></span></label></div><div class="toggle-row"><div><strong>Alterações de status</strong><span>Quando uma reclamação mudar de status</span></div><label class="switch"><input type="checkbox" name="statusUpdates"><span></span></label></div></section>
+            <form class="surface settings-card" id="preferences-form"><div class="settings-title"><span class="settings-icon">⚑</span><div><h2>Preferências do sistema</h2><p>Personalize sua experiência</p></div></div><label>Idioma<select name="language"><option>Português (Brasil)</option><option>English</option><option>Español</option></select></label><label>Fuso horário<select name="timezone"><option>Brasília (GMT−3)</option><option>Fernando de Noronha (GMT−2)</option></select></label><label>Arquivar reclamações resolvidas após<select name="archive"><option>30 dias</option><option>60 dias</option><option>90 dias</option><option>Nunca</option></select></label><button class="button button-primary" type="submit">Salvar preferências</button></form>
+            <form class="surface settings-card" id="security-form"><div class="settings-title"><span class="settings-icon">◇</span><div><h2>Segurança</h2><p>Proteja o acesso à sua conta</p></div></div><div class="toggle-row"><div><strong>Autenticação em dois fatores</strong><span>Adicione uma camada extra de proteção</span></div><label class="switch"><input type="checkbox" name="twoFactor"><span></span></label></div><label>Tempo limite da sessão<select name="sessionTimeout"><option>30 minutos</option><option>1 hora</option><option>4 horas</option></select></label><button class="button button-primary" type="button" data-action="change-password">Alterar senha</button></form>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog class="simple-dialog" id="app-dialog"><div class="dialog-shell"><button class="dialog-close" type="button" aria-label="Fechar">×</button><div id="dialog-content"></div></div></dialog>
+</body>
+</html>
