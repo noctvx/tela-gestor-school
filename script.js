@@ -176,6 +176,8 @@ let activePersonName = "";
 let activeChannel = "Geral";
 let currentReportPeriod = 30;
 
+class LocalDemoRedirectError extends Error {}
+
 async function apiRequest(url, options = {}) {
   if (demoMode) {
     throw new Error("Esta ação não está disponível na demonstração local.");
@@ -195,6 +197,10 @@ async function apiRequest(url, options = {}) {
   if (response.status === 204) return null;
   const contentType = response.headers.get("content-type") || "";
   if (!contentType.includes("json")) {
+    if (isLocalDemoEnvironment) {
+      window.location.replace("login.html");
+      throw new LocalDemoRedirectError();
+    }
     throw new Error("A API do SchoolFix não respondeu. Para usar a demonstração, abra a tela de login local; para usar o sistema real, inicie o backend com npm start e acesse http://localhost:3000.");
   }
   const payload = await response.json();
@@ -256,6 +262,7 @@ async function initializeAuthenticatedApp() {
     const initialPage = location.hash.slice(1);
     if (initialPage && document.getElementById(`page-${initialPage}`)) goToPage(initialPage);
   } catch (error) {
+    if (error instanceof LocalDemoRedirectError) return;
     console.error("Não foi possível carregar a sessão:", error);
     showToast(error.message);
   }
