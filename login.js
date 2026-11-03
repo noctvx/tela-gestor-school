@@ -5,6 +5,23 @@ const alertBox = document.getElementById("login-alert");
 const formTitle = document.getElementById("form-title");
 const formDescription = document.getElementById("form-description");
 const resetToken = new URLSearchParams(location.search).get("reset");
+const isGitHubPages = location.hostname.endsWith(".github.io");
+const isLocalDemoEnvironment = location.protocol === "file:"
+  || isGitHubPages
+  || ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+const isStaticDemoEnvironment = location.protocol === "file:" || isGitHubPages;
+
+if (isStaticDemoEnvironment) {
+  document.querySelector("[data-show-recovery]").hidden = true;
+}
+
+async function readApiResponse(response) {
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("json")) {
+    throw new Error("A API do SchoolFix não respondeu. Para usar a demonstração, abra a tela de login local; para usar o sistema real, inicie o backend com npm start e acesse http://localhost:3000.");
+  }
+  return response.json();
+}
 
 function showAlert(message, success = false) {
   alertBox.textContent = message;
@@ -71,9 +88,12 @@ loginForm.addEventListener("submit", async (event) => {
       ALU2026001: "aluno",
       GES2026001: "gestor"
     };
-    if (location.protocol === "file:" && demoAccounts[ra] && password === "1234") {
+    if (isLocalDemoEnvironment && demoAccounts[ra] && password === "1234") {
       location.replace(`index.html?demo=${encodeURIComponent(ra)}`);
       return;
+    }
+    if (isStaticDemoEnvironment) {
+      throw new Error("RA ou senha de demonstração inválidos. Use um dos perfis exibidos na tela e a senha 1234.");
     }
 
     const response = await fetch("/api/auth/login", {
@@ -84,7 +104,7 @@ loginForm.addEventListener("submit", async (event) => {
         password
       })
     });
-    const payload = await response.json();
+    const payload = await readApiResponse(response);
     if (!response.ok) throw new Error(payload.error || "Não foi possível entrar.");
     location.replace("/painel");
   } catch (error) {
@@ -110,7 +130,7 @@ recoveryForm.addEventListener("submit", async (event) => {
         email: recoveryForm.elements.email.value.trim()
       })
     });
-    const payload = await response.json();
+    const payload = await readApiResponse(response);
     if (!response.ok) throw new Error(payload.error || "Não foi possível solicitar a recuperação.");
     showAlert(payload.message, true);
   } catch (error) {
@@ -141,7 +161,7 @@ resetForm.addEventListener("submit", async (event) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: resetToken, password: resetForm.elements.password.value })
     });
-    const payload = await response.json();
+    const payload = await readApiResponse(response);
     if (!response.ok) throw new Error(payload.error || "Não foi possível redefinir a senha.");
     showAlert(payload.message, true);
     window.setTimeout(() => location.replace("/"), 1800);
@@ -154,7 +174,9 @@ resetForm.addEventListener("submit", async (event) => {
   }
 });
 
-if (resetToken) {
+if (resetToken && isStaticDemoEnvironment) {
+  showAlert("A recuperação de senha não está disponível nesta demonstração.");
+} else if (resetToken) {
   loginForm.hidden = true;
   document.getElementById("login-demo").hidden = true;
   resetForm.hidden = false;

@@ -6,7 +6,7 @@ O SchoolFix é um painel para alunos registrarem reclamações e sugestões, e p
 
 O projeto tem duas formas de uso:
 
-- **Demonstração local:** abre os arquivos diretamente no navegador. Não precisa de banco de dados. Os registros de teste ficam salvos naquele navegador.
+- **Demonstração estática:** funciona ao abrir os arquivos diretamente ou no GitHub Pages. Não precisa de backend nem banco de dados. Os registros de teste ficam salvos naquele navegador.
 - **Sistema real:** usa um servidor Node.js e um banco MySQL. As contas, reclamações e sugestões são salvas no banco. Esta forma exige a instalação e a configuração descritas abaixo.
 
 Quando o sistema real está configurado, o fluxo é:
@@ -74,18 +74,18 @@ Quando o sistema real está configurado, o fluxo é:
 
 Durante o desenvolvimento, `npm run dev` reinicia o servidor quando os arquivos do backend mudam. `npm run check` verifica a sintaxe dos arquivos JavaScript.
 
-## Demonstração simples, sem banco de dados
+## Demonstração estática, sem backend ou banco de dados
 
 Para experimentar o painel sem instalar o MySQL:
 
-1. Abra o arquivo `login.html` no navegador.
+1. Abra a página publicada no GitHub Pages ou o arquivo `login.html` no navegador. Também é possível servir a pasta em um endereço local, como `http://localhost:5500/login.html`.
 2. Entre com um destes RAs e a senha `1234`:
    - Aluno: `ALU2026001`
    - Gestor: `GES2026001`
 3. Como aluno, crie uma reclamação ou sugestão.
 4. Volte à tela de login, entre como gestor e abra **Todas as reclamações**. Os registros enviados pelo aluno também aparecem na lista de sugestões dessa tela.
 
-Na demonstração, os registros ficam no armazenamento local do navegador e podem ser vistos pelos dois perfis **nesse mesmo navegador e computador**. Eles não vão para o MySQL, não são enviados à UNISAL e não aparecem em outros dispositivos. O gestor também pode alterar o status e responder às reclamações de teste.
+Na demonstração, os registros ficam no armazenamento local do navegador e podem ser vistos pelos dois perfis **nesse mesmo navegador e computador**. Eles não vão para o MySQL, não são enviados à UNISAL e não aparecem em outros dispositivos. O gestor também pode alterar o status e responder às reclamações de teste. No GitHub Pages, o site abre a tela de login da demonstração automaticamente. Essa versão é apenas estática; recuperação de senha, contas reais e sincronização entre dispositivos exigem o backend.
 
 ## Recuperação de senha
 

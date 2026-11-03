@@ -11,7 +11,12 @@ const categories = [
   { name: "Alimentação", amount: 0, color: "#55a889" }
 ];
 let currentUser = null;
-const demoRa = location.protocol === "file:" ? new URLSearchParams(location.search).get("demo") : null;
+const isGitHubPages = location.hostname.endsWith(".github.io");
+const isLocalDemoEnvironment = location.protocol === "file:"
+  || isGitHubPages
+  || ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+const isStaticDemoEnvironment = location.protocol === "file:" || isGitHubPages;
+const demoRa = isLocalDemoEnvironment ? new URLSearchParams(location.search).get("demo") : null;
 const demoUser = ({
   ALU2026001: {
     id: "demo-aluno",
@@ -187,7 +192,12 @@ async function apiRequest(url, options = {}) {
     window.location.replace("/");
     throw new Error("Sua sessão expirou. Entre novamente.");
   }
-  const payload = response.status === 204 ? null : await response.json();
+  if (response.status === 204) return null;
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("json")) {
+    throw new Error("A API do SchoolFix não respondeu. Para usar a demonstração, abra a tela de login local; para usar o sistema real, inicie o backend com npm start e acesse http://localhost:3000.");
+  }
+  const payload = await response.json();
   if (!response.ok) throw new Error(payload?.error || "Não foi possível concluir a solicitação.");
   return payload;
 }
@@ -197,6 +207,11 @@ function userRoleLabel(role) {
 }
 
 async function initializeAuthenticatedApp() {
+  if (isStaticDemoEnvironment && !demoMode) {
+    window.location.replace("login.html");
+    return;
+  }
+
   try {
     const user = demoMode ? demoUser : (await apiRequest("/api/auth/me")).user;
     currentUser = user;
