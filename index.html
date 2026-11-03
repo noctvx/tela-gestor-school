@@ -37,31 +37,33 @@
         <div class="school-title"><span class="school-icon"><img src="https://cdn-icons-png.flaticon.com/128/9316/9316730.png" alt=""></span><span>Unisal — Gestão de Reclamações</span></div>
         <div class="topbar-actions">
           <div class="notification-wrap">
-            <button class="icon-button notification-button" type="button" aria-label="Abrir notificações" aria-expanded="false"><img src="https://cdn-icons-png.flaticon.com/128/4991/4991422.png" alt=""><span class="notification-dot"></span></button>
+            <button class="icon-button notification-button" type="button" aria-label="Abrir notificações" aria-expanded="false"><img src="https://cdn-icons-png.flaticon.com/128/4991/4991422.png" alt=""><span class="notification-dot" hidden></span></button>
             <div class="notification-popover" hidden>
-              <strong>Notificações</strong>
-              <p><span class="notification-mark"></span>Nova reclamação: Laboratório de Química</p>
-              <p><span class="notification-mark muted"></span>Relatório mensal disponível</p>
-              <button type="button" class="text-button" data-action="read-notifications">Marcar como lidas</button>
+            <strong>Notificações</strong>
+            <p>As notificações serão exibidas aqui.</p>
             </div>
           </div>
           <span class="topbar-divider"></span>
-          <span class="user-avatar">M</span>
-          <div class="user-info"><strong>Gestor Mario</strong><span>Gestor Geral</span></div>
+          <span class="user-avatar" data-auth-avatar>SF</span>
+          <div class="user-info"><strong data-auth-name>Carregando...</strong><span data-auth-role></span></div>
+          <button class="logout-button" id="logout-button" type="button">Sair</button>
         </div>
       </header>
 
       <div class="page-content">
+        <div class="demo-banner" id="demo-banner" role="status" hidden>
+          Demonstração local: os dados ficam neste navegador e são compartilhados entre os perfis de aluno e gestor. Não são enviados a um banco de dados.
+        </div>
         <section class="page-view active" id="page-inicio" data-title="Visão geral">
           <div class="page-heading">
-            <div><p class="eyebrow">QUARTA-FEIRA, 15 DE OUTUBRO</p><h1>Olá, Gestor Mario <span class="wave">✦</span></h1><p class="page-description">Aqui está o resumo geral das ocorrências e reclamações escolares.</p></div>
+            <div><p class="eyebrow">COMUNIDADE ACADÊMICA</p><h1>Olá, <span class="wave">✦</span></h1><p class="page-description">Aqui está o resumo das reclamações registradas na plataforma.</p></div>
             <button class="button button-primary" type="button" data-navigate="reclamacoes"><span>＋</span> Nova reclamação</button>
           </div>
           <div class="stats-grid">
-            <article class="stat-card"><div class="stat-top"><span>Total de reclamações</span><span class="stat-icon indigo"><img src="https://cdn-icons-png.flaticon.com/128/9775/9775639.png" alt=""></span></div><strong>148</strong><small class="trend positive">↗ 12% <span>vs. mês anterior</span></small></article>
-            <article class="stat-card"><div class="stat-top"><span>Pendentes</span><span class="stat-icon amber"><img src="https://cdn-icons-png.flaticon.com/128/992/992700.png" alt=""></span></div><strong>32</strong><small class="trend neutral">Aguardando análise</small></article>
-            <article class="stat-card"><div class="stat-top"><span>Em análise</span><span class="stat-icon blue"><img src="https://cdn-icons-png.flaticon.com/128/709/709612.png" alt=""></span></div><strong>45</strong><small class="trend neutral">Sendo acompanhadas</small></article>
-            <article class="stat-card"><div class="stat-top"><span>Resolvidas</span><span class="stat-icon green"><img src="https://cdn-icons-png.flaticon.com/128/157/157977.png" alt=""></span></div><strong>71</strong><small class="trend positive">↗ 8% <span>este mês</span></small></article>
+            <article class="stat-card"><div class="stat-top"><span>Total de reclamações</span><span class="stat-icon indigo"><img src="https://cdn-icons-png.flaticon.com/128/9775/9775639.png" alt=""></span></div><strong id="stat-total">0</strong><small class="trend neutral">Registros vinculados à sua conta</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Pendentes</span><span class="stat-icon amber"><img src="https://cdn-icons-png.flaticon.com/128/992/992700.png" alt=""></span></div><strong id="stat-pending">0</strong><small class="trend neutral">Aguardando análise</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Em análise</span><span class="stat-icon blue"><img src="https://cdn-icons-png.flaticon.com/128/709/709612.png" alt=""></span></div><strong id="stat-analysis">0</strong><small class="trend neutral">Sendo acompanhadas</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Resolvidas</span><span class="stat-icon green"><img src="https://cdn-icons-png.flaticon.com/128/157/157977.png" alt=""></span></div><strong id="stat-resolved">0</strong><small class="trend neutral">Concluídas pela instituição</small></article>
           </div>
           <div class="dashboard-grid">
             <section class="surface recent-panel">
@@ -74,16 +76,16 @@
             <section class="surface category-panel">
               <div class="section-heading"><div><h2>Ocorrências por categoria</h2><p>Distribuição das reclamações</p></div><span class="more-dots">•••</span></div>
               <div class="category-list" id="home-categories"></div>
-              <div class="category-foot"><span class="legend-dot"></span>Infraestrutura <span class="category-total">148 no total</span></div>
+              <div class="category-foot"><span class="legend-dot"></span>Infraestrutura <span class="category-total">0 no total</span></div>
             </section>
           </div>
-          <section class="surface attention-card"><div class="attention-symbol">!</div><div><strong>Você tem 8 reclamações aguardando atenção</strong><p>Revise os novos registros para manter a comunidade informada.</p></div><button class="button button-light" type="button" data-navigate="reclamacoes">Revisar agora <span>→</span></button></section>
+          <section class="surface attention-card"><div class="attention-symbol">!</div><div><strong id="attention-copy">0 reclamações aguardando atenção</strong><p>Acompanhe os registros e as respostas da instituição.</p></div><button class="button button-light" type="button" data-navigate="reclamacoes">Acompanhar <span>→</span></button></section>
         </section>
 
         <section class="page-view" id="page-reclamacoes" data-title="Todas as reclamações">
           <div class="complaints-layout">
             <div class="complaints-main">
-              <div class="page-heading compact-heading"><div><p class="eyebrow">CENTRAL DE ATENDIMENTO</p><h1>Todas as reclamações</h1><p class="page-description">Gerencie, acompanhe e responda às solicitações da comunidade.</p></div><button class="button button-primary" type="button" data-action="new-complaint">＋ Nova reclamação</button></div>
+              <div class="page-heading compact-heading"><div><p class="eyebrow">CENTRAL DE ATENDIMENTO</p><h1>Todas as reclamações</h1><p class="page-description">Gerencie, acompanhe e responda às solicitações da comunidade.</p></div><div class="heading-actions"><button class="button button-outline" type="button" data-action="new-suggestion">＋ Nova sugestão</button><button class="button button-primary" type="button" data-action="new-complaint">＋ Nova reclamação</button></div></div>
               <section class="surface complaints-list">
                 <div class="list-toolbar"><label class="search-box"><span>⌕</span><input id="complaint-search" type="search" placeholder="Buscar por título, autor ou protocolo..." aria-label="Buscar reclamações"></label><button class="icon-button filter-button" type="button" data-action="toggle-filter" aria-label="Mostrar filtros">☷</button></div>
                 <div class="filter-row" role="group" aria-label="Filtrar reclamações por status">
@@ -102,6 +104,10 @@
             </div>
             <aside class="surface complaint-detail" id="complaint-detail" aria-live="polite"></aside>
           </div>
+          <section class="surface suggestions-panel">
+            <div class="section-heading"><div><h2>Sugestões da comunidade</h2><p>Ideias registradas para melhorar a instituição.</p></div></div>
+            <div id="suggestion-list"></div>
+          </section>
         </section>
 
         <section class="page-view" id="page-chat" data-title="Chat geral">
@@ -109,22 +115,16 @@
           <div class="chat-layout surface">
             <aside class="channel-sidebar"><h3>CANAIS</h3><button class="channel selected" type="button"><span>#</span> Geral <i class="online-dot"></i></button><button class="channel" type="button"><span>#</span> Professores</button><button class="channel" type="button"><span>#</span> Gestão</button><div class="channel-note"><strong>Seja respeitoso 💚</strong><span>Este espaço é para toda a comunidade escolar.</span></div></aside>
             <section class="chat-room">
-              <div class="chat-room-heading"><div><h2># Geral</h2><p>Conversa aberta para toda a comunidade</p></div><span class="online-count"><i class="online-dot"></i> 24 membros</span></div>
-              <div class="message-list" id="general-messages" aria-live="polite">
-                <div class="date-separator"><span>HOJE</span></div>
-                <article class="message"><span class="person-avatar lavender">AS</span><div><div class="message-meta"><strong>Ana Silva</strong><span>Professora · 09:12</span></div><p>Oi, pessoal! Alguém sabe quando teremos novidades sobre a biblioteca?</p></div></article>
-                <article class="message"><span class="person-avatar mint">MS</span><div><div class="message-meta"><strong>Marcos Souza</strong><span>Coordenador · 09:18</span></div><p>Oi, Ana! Estamos organizando tudo e logo compartilharemos as atualizações por aqui.</p></div></article>
-                <article class="message own-message"><span class="person-avatar navy-avatar">M</span><div><div class="message-meta"><strong>Gestor Mario <span class="you-tag">VOCÊ</span></strong><span>09:24</span></div><p>Excelente ponto! Vou confirmar o cronograma com a equipe e aviso vocês ainda hoje.</p></div></article>
-                <article class="message"><span class="person-avatar peach">LT</span><div><div class="message-meta"><strong>Lucas Torres</strong><span>Aluno · 09:31</span></div><p>Obrigado pelo retorno, Gestor! 😊</p></div></article>
-              </div>
+              <div class="chat-room-heading"><div><h2># Geral</h2><p>Conversa aberta para toda a comunidade</p></div><span class="online-count">Canal institucional</span></div>
+              <div class="message-list" id="general-messages" aria-live="polite"></div>
               <form class="message-composer" id="general-chat-form"><input name="message" autocomplete="off" placeholder="Escreva uma mensagem..." aria-label="Escreva uma mensagem"><button class="attach-button" type="button" aria-label="Anexar arquivo" data-action="attach">＋</button><button class="send-button" type="submit" aria-label="Enviar mensagem">➤</button></form>
             </section>
-            <aside class="members-sidebar"><div class="members-heading"><h3>MEMBROS</h3><span>24</span></div><div class="member"><span class="person-avatar lavender">AS</span><span><strong>Ana Silva</strong><small>Professora</small></span><i class="online-dot"></i></div><div class="member"><span class="person-avatar mint">MS</span><span><strong>Marcos Souza</strong><small>Coordenador</small></span><i class="online-dot"></i></div><div class="member"><span class="person-avatar peach">LT</span><span><strong>Lucas Torres</strong><small>Aluno</small></span></div><div class="member"><span class="person-avatar blue-avatar">CP</span><span><strong>Carla Pereira</strong><small>Professora</small></span></div><button class="text-button members-more" type="button" data-action="members">Ver todos os membros →</button></aside>
+            <aside class="members-sidebar"><div class="members-heading"><h3>COMUNIDADE</h3></div><div class="empty-state">A lista de participantes não está disponível nesta versão.</div></aside>
           </div>
         </section>
 
         <section class="page-view" id="page-mensagens" data-title="Mensagens diretas">
-          <div class="page-heading compact-heading"><div><p class="eyebrow">CONVERSAS PRIVADAS</p><h1>Mensagens diretas</h1><p class="page-description">Converse em particular com a equipe escolar.</p></div><button class="button button-primary" type="button" data-action="new-message">＋ Nova conversa</button></div>
+          <div class="page-heading compact-heading"><div><p class="eyebrow">CONVERSAS PRIVADAS</p><h1>Mensagens diretas</h1><p class="page-description">As conversas diretas ficam salvas apenas neste navegador e ainda não são sincronizadas entre usuários.</p></div><button class="button button-primary" type="button" data-action="new-message">＋ Nova conversa</button></div>
           <div class="direct-layout surface">
             <aside class="direct-people"><label class="search-box"><span>⌕</span><input id="people-search" type="search" placeholder="Buscar conversa..." aria-label="Buscar conversa"></label><div class="direct-list" id="direct-list"></div></aside>
             <section class="direct-room"><div class="direct-room-heading" id="direct-heading"></div><div class="message-list" id="direct-messages" aria-live="polite"></div><form class="message-composer" id="direct-chat-form"><input name="message" autocomplete="off" placeholder="Escreva uma mensagem..." aria-label="Escreva uma mensagem"><button class="send-button" type="submit" aria-label="Enviar mensagem">➤</button></form></section>
@@ -135,20 +135,39 @@
           <div class="page-heading compact-heading"><div><p class="eyebrow">DADOS E INDICADORES</p><h1>Relatórios</h1><p class="page-description">Métricas e análise de resolução de problemas e solicitações escolares.</p></div><div class="heading-actions"><select id="report-period" aria-label="Período do relatório"><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Este ano</option></select><button class="button button-primary" type="button" data-action="export-report">⇩ <span>Exportar CSV</span></button></div></div>
           <div class="reports-grid">
             <section class="surface report-card status-report"><div class="section-heading"><div><h2>Visão por status</h2><p>Distribuição atual das reclamações</p></div><span class="more-dots">•••</span></div><div class="status-bars" id="report-status-bars"></div></section>
-            <section class="surface report-card priority-report"><div class="section-heading"><div><h2>Visão por prioridade</h2><p>Urgência dos chamados recebidos</p></div><span class="more-dots">•••</span></div><div class="donut-wrap"><div class="donut-chart"><div><strong>148</strong><span>reclamações</span></div></div><div class="donut-legend"><span><i class="dot red-dot"></i>Alta <b>35%</b></span><span><i class="dot blue-dot"></i>Média <b>42%</b></span><span><i class="dot green-dot"></i>Baixa <b>23%</b></span></div></div></section>
+            <section class="surface report-card priority-report"><div class="section-heading"><div><h2>Visão por status</h2><p>Distribuição das reclamações no período</p></div><span class="more-dots">•••</span></div><div class="donut-wrap"><div class="donut-chart"><div><strong id="report-total">0</strong><span>reclamações</span></div></div><div class="donut-legend"><span><i class="dot green-dot"></i>Resolvidas <b data-status-percent="Resolvido">0%</b></span><span><i class="dot blue-dot"></i>Em análise <b data-status-percent="Em Análise">0%</b></span><span><i class="dot red-dot"></i>Pendentes <b data-status-percent="Pendente">0%</b></span><span><i class="dot"></i>Arquivadas <b data-status-percent="Arquivada">0%</b></span></div></div></section>
             <section class="surface report-card volume-report"><div class="section-heading"><div><h2>Volume por categoria</h2><p>Registros por área</p></div><span class="more-dots">•••</span></div><div class="vertical-chart" id="category-chart"></div></section>
           </div>
-          <div class="metric-grid"><article class="surface metric-card"><span>Tempo médio de resolução</span><strong>2,4 dias</strong><small class="trend positive">↓ 12% em relação ao mês anterior</small></article><article class="surface metric-card"><span>Taxa de resolução</span><strong>94,2%</strong><small class="trend positive">Dentro da meta (90%)</small></article><article class="surface metric-card"><span>Categoria mais frequente</span><strong>Infraestrutura</strong><small>Corresponde a 30% do total</small></article><article class="surface metric-card"><span>Próximo dia de pico</span><strong>Segunda-feira</strong><small>Maior volume entre 10h e 12h</small></article></div>
+          <div class="metric-grid"><article class="surface metric-card"><span>Tempo médio de resolução</span><strong id="report-average">—</strong><small>Calculado a partir dos registros resolvidos</small></article><article class="surface metric-card"><span>Taxa de resolução</span><strong id="report-resolution-rate">—</strong><small>Reclamações resolvidas no período selecionado</small></article><article class="surface metric-card"><span>Categoria mais frequente</span><strong id="report-top-category">—</strong><small id="report-top-category-count">Sem registros no período</small></article><article class="surface metric-card"><span>Dia com mais registros</span><strong id="report-peak">—</strong><small>Com base nas reclamações do período</small></article></div>
         </section>
 
         <section class="page-view" id="page-configuracoes" data-title="Configurações">
           <div class="page-heading compact-heading"><div><p class="eyebrow">PREFERÊNCIAS DA CONTA</p><h1>Configurações</h1><p class="page-description">Gerencie os dados da instituição, notificações e preferências do sistema.</p></div></div>
           <div class="settings-grid">
-            <form class="surface settings-card" id="institution-form"><div class="settings-title"><span class="settings-icon">▦</span><div><h2>Perfil da instituição</h2><p>Informações da sua escola</p></div></div><label>Nome da escola<input name="school" value="C.E. Mário de Andrade" required></label><label>Endereço<input name="address" value="Av. das Palmeiras, 845 — Centro" required></label><div class="form-row"><label>Telefone<input name="phone" value="(11) 3456-7890" type="tel"></label><label>E-mail<input name="email" value="contato@escola.edu.br" type="email"></label></div><button class="button button-primary" type="submit">Salvar alterações</button></form>
+            <form class="surface settings-card" id="institution-form"><div class="settings-title"><span class="settings-icon">▦</span><div><h2>Perfil da instituição</h2><p>Informações da sua instituição</p></div></div><label>Nome da instituição<input name="school" value="UNISAL" required></label><label>Endereço<input name="address" value=""></label><div class="form-row"><label>Telefone<input name="phone" value="" type="tel"></label><label>E-mail<input name="email" value="" type="email"></label></div><button class="button button-primary" type="submit">Salvar alterações</button></form>
             <section class="surface settings-card"><div class="settings-title"><span class="settings-icon">♧</span><div><h2>Notificações</h2><p>Escolha o que deseja receber</p></div></div><div class="toggle-row"><div><strong>Notificações por e-mail</strong><span>Receba atualizações importantes por e-mail</span></div><label class="switch"><input type="checkbox" name="emailNotifications" checked><span></span></label></div><div class="toggle-row"><div><strong>Notificações push</strong><span>Alertas em tempo real no navegador</span></div><label class="switch"><input type="checkbox" name="pushNotifications" checked><span></span></label></div><div class="toggle-row"><div><strong>Novas reclamações</strong><span>Quando uma nova reclamação for registrada</span></div><label class="switch"><input type="checkbox" name="newComplaints" checked><span></span></label></div><div class="toggle-row"><div><strong>Alterações de status</strong><span>Quando uma reclamação mudar de status</span></div><label class="switch"><input type="checkbox" name="statusUpdates"><span></span></label></div></section>
             <form class="surface settings-card" id="preferences-form"><div class="settings-title"><span class="settings-icon">⚑</span><div><h2>Preferências do sistema</h2><p>Personalize sua experiência</p></div></div><label>Idioma<select name="language"><option>Português (Brasil)</option><option>English</option><option>Español</option></select></label><label>Fuso horário<select name="timezone"><option>Brasília (GMT−3)</option><option>Fernando de Noronha (GMT−2)</option></select></label><label>Arquivar reclamações resolvidas após<select name="archive"><option>30 dias</option><option>60 dias</option><option>90 dias</option><option>Nunca</option></select></label><button class="button button-primary" type="submit">Salvar preferências</button></form>
-            <form class="surface settings-card" id="security-form"><div class="settings-title"><span class="settings-icon">◇</span><div><h2>Segurança</h2><p>Proteja o acesso à sua conta</p></div></div><div class="toggle-row"><div><strong>Autenticação em dois fatores</strong><span>Adicione uma camada extra de proteção</span></div><label class="switch"><input type="checkbox" name="twoFactor"><span></span></label></div><label>Tempo limite da sessão<select name="sessionTimeout"><option>30 minutos</option><option>1 hora</option><option>4 horas</option></select></label><button class="button button-primary" type="button" data-action="change-password">Alterar senha</button></form>
+            <form class="surface settings-card" id="security-form"><div class="settings-title"><span class="settings-icon">◇</span><div><h2>Segurança</h2><p>Sessão protegida por até 8 horas.</p></div></div><button class="button button-primary" type="button" data-action="change-password">Alterar senha</button></form>
           </div>
+          <section class="surface settings-card admin-user-card" id="admin-user-card" hidden>
+            <div class="settings-title"><span class="settings-icon">＋</span><div><h2>Cadastrar usuário</h2><p>Crie uma conta para aluno, professor ou administrador.</p></div></div>
+            <form id="admin-user-form">
+              <div class="form-row">
+                <label>RA<input name="ra" required minlength="3" maxlength="30" autocomplete="off"></label>
+                <label>Nome completo<input name="fullName" required minlength="3" maxlength="160" autocomplete="name"></label>
+              </div>
+              <div class="form-row">
+                <label>E-mail institucional<input name="institutionalEmail" type="email" required maxlength="254" autocomplete="email"></label>
+                <label>Curso ou área<input name="course" required minlength="2" maxlength="120"></label>
+              </div>
+              <div class="form-row">
+                <label>Tipo de usuário<select name="userType" required><option value="aluno">Aluno</option><option value="professor">Professor</option><option value="administrador">Administrador</option></select></label>
+                <label>Senha inicial<input name="password" type="password" required minlength="10" maxlength="72" autocomplete="new-password"></label>
+              </div>
+              <button class="button button-primary" type="submit">Cadastrar conta</button>
+              <p class="form-feedback" id="admin-user-feedback" role="status" hidden></p>
+            </form>
+          </section>
         </section>
       </div>
     </main>

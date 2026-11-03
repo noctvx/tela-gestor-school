@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#211f62">
+  <meta name="description" content="Acesse o SchoolFix com seu Registro Acadêmico.">
+  <title>Entrar | SchoolFix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="login.js" defer></script>
+</head>
+<body class="login-page">
+  <main class="login-layout">
+    <section class="login-brand-panel" aria-label="SchoolFix">
+      <a class="brand login-brand" href="/" aria-label="SchoolFix">
+        <span class="brand-mark">SF</span><span>SchoolFix</span>
+      </a>
+      <div class="login-brand-copy">
+        <span class="login-kicker">UNISAL · COMUNIDADE ACADÊMICA</span>
+        <h1>Uma comunidade melhor começa com a sua voz.</h1>
+        <p>Registre, acompanhe e ajude a resolver questões da sua instituição.</p>
+      </div>
+      <div class="login-brand-footer"><span class="brand-mark">SF</span><span>Gestão escolar mais próxima e transparente.</span></div>
+    </section>
+
+    <section class="login-main">
+      <div class="login-card">
+        <a class="brand login-card-brand" href="/" aria-label="SchoolFix">
+          <span class="brand-mark">SF</span><span>SchoolFix</span>
+        </a>
+        <div class="login-heading">
+          <p class="eyebrow">BEM-VINDO(A) DE VOLTA</p>
+          <h2 id="form-title">Acesse sua conta</h2>
+          <p id="form-description">Entre com seu Registro Acadêmico e sua senha.</p>
+        </div>
+
+        <div class="login-alert" id="login-alert" role="alert" hidden></div>
+
+        <form class="login-form" id="login-form" novalidate>
+          <label for="ra">Registro Acadêmico (RA)</label>
+          <input id="ra" name="ra" type="text" inputmode="text" autocomplete="username" maxlength="30" placeholder="Informe seu RA" required>
+          <label for="password">Senha</label>
+          <div class="password-field">
+            <input id="password" name="password" type="password" autocomplete="current-password" maxlength="72" placeholder="Informe sua senha" required>
+            <button type="button" class="password-toggle" data-toggle-password aria-label="Mostrar senha">Mostrar</button>
+          </div>
+          <div class="login-options">
+            <span>Acesso exclusivo da comunidade acadêmica</span>
+            <button type="button" class="login-link" data-show-recovery>Esqueci minha senha</button>
+          </div>
+          <button class="button button-primary login-submit" type="submit">
+            <span class="button-label">Entrar</span><span class="login-spinner" aria-hidden="true" hidden></span>
+          </button>
+        </form>
+
+        <aside class="login-demo" id="login-demo" aria-label="Credenciais de demonstração">
+          <strong>Acesso de demonstração local</strong>
+          <span>Aluno: <code>ALU2026001</code> · Gestor: <code>GES2026001</code></span>
+          <span>Senha para ambos: <code>1234</code></span>
+          <small>Disponível somente ao abrir este arquivo localmente. Registros de teste ficam apenas neste navegador.</small>
+        </aside>
+
+        <form class="login-form recovery-form" id="recovery-form" hidden>
+          <label for="recovery-ra">Registro Acadêmico (RA)</label>
+          <input id="recovery-ra" name="ra" type="text" maxlength="30" autocomplete="username" placeholder="Informe seu RA" required>
+          <label for="recovery-email">E-mail institucional</label>
+          <input id="recovery-email" name="email" type="email" maxlength="254" autocomplete="email" placeholder="voce@instituicao.edu.br" required>
+          <button class="button button-primary login-submit" type="submit">
+            <span class="button-label">Enviar instruções</span><span class="login-spinner" aria-hidden="true" hidden></span>
+          </button>
+          <button type="button" class="login-link back-to-login" data-show-login>Voltar para o login</button>
+        </form>
+
+        <form class="login-form reset-form" id="reset-form" hidden>
+          <label for="new-password">Nova senha</label>
+          <div class="password-field">
+            <input id="new-password" name="password" type="password" autocomplete="new-password" minlength="10" maxlength="72" placeholder="Mínimo de 10 caracteres" required>
+            <button type="button" class="password-toggle" data-toggle-password aria-label="Mostrar senha">Mostrar</button>
+          </div>
+          <label for="confirm-password">Confirme a nova senha</label>
+          <input id="confirm-password" name="confirmation" type="password" autocomplete="new-password" minlength="10" maxlength="72" placeholder="Digite a senha novamente" required>
+          <button class="button button-primary login-submit" type="submit">
+            <span class="button-label">Redefinir senha</span><span class="login-spinner" aria-hidden="true" hidden></span>
+          </button>
+        </form>
+
+        <p class="login-footnote">Problemas para acessar? Entre em contato com a administração da sua instituição.</p>
+      </div>
+      <footer class="login-copyright">SchoolFix · Plataforma de gestão escolar</footer>
+    </section>
+  </main>
+</body>
+</html>
